@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="iago">
+        <sql>
+            CREATE TABLE curso (
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            titulo VARCHAR(255) NOT NULL,
+            autor VARCHAR(255) NOT NULL,
+            categoria VARCHAR(255),
+            publish_date DATE,
+            CONSTRAINT pk_id PRIMARY KEY (id)
+            );
+        </sql>
+        <rollback>
+            DROP TABLE curso;
+        </rollback>
+    </changeSet>
+    <changeSet id="2" author="sha">
+        <sql>
+            CREATE TABLE transaction (
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            curso BIGINT NOT NULL,
+            user_id BIGINT NOT NULL,
+            date_of_issue DATETIME,
+            CONSTRAINT pk_id PRIMARY KEY (id),
+            CONSTRAINT fk_tran_course FOREIGN KEY (curso_id) REFERENCES curse(id) ON DELETE CASCADE ON UPDATE CASCADE
+            );
+        </sql>
+        <rollback>
+            DROP TABLE transaction;
+        </rollback>
+    </changeSet>
+
+
+</databaseChangeLog>

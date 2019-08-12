@@ -16,7 +16,7 @@ public class Transaction {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "curse_id", referencedColumnName = "id")
+    @JoinColumn(name = "curso_id", referencedColumnName = "id")
     private Curso curso;
 
     @Column(name = "user_id")
