@@ -22,19 +22,31 @@
             DROP TABLE curso;
         </rollback>
     </changeSet>
-    <changeSet id="2" author="sha">
+    <changeSet id="2" author="iago">
         <sql>
             CREATE TABLE transaction (
             id BIGINT NOT NULL AUTO_INCREMENT,
-            curso BIGINT NOT NULL,
+            curso_id BIGINT NOT NULL,
             user_id BIGINT NOT NULL,
             date_of_issue DATETIME,
             CONSTRAINT pk_id PRIMARY KEY (id),
-            CONSTRAINT fk_tran_course FOREIGN KEY (curso_id) REFERENCES curse(id) ON DELETE CASCADE ON UPDATE CASCADE
+            CONSTRAINT fk_tran_curso FOREIGN KEY (curso_id) REFERENCES curso(id) ON DELETE CASCADE ON UPDATE CASCADE
             );
         </sql>
         <rollback>
             DROP TABLE transaction;
+        </rollback>
+    </changeSet>
+    <changeSet id="3" author="iago">
+        <sql>
+            INSERT INTO curso (titulo, autor, categoria, publish_date) VALUES('Microservices', 'Instructor 1', 'Programming', NOW());
+            INSERT INTO curso (titulo, autor, categoria, publish_date) VALUES('Java Programming', 'Instructor 2', 'Programming', NOW());
+            INSERT INTO curso (titulo, autor, categoria, publish_date) VALUES('Web Development', 'Instructor 3', 'Web', NOW());
+            INSERT INTO curso (titulo, autor, categoria, publish_date) VALUES('Mobile Application', 'Instructor 4', 'Mobile', NOW());
+            INSERT INTO curso (titulo, autor, categoria, publish_date) VALUES('Amazon Web Services', 'Instructor 5', 'Administration', NOW());
+        </sql>
+        <rollback>
+            TRUNCATE TABLE curso;
         </rollback>
     </changeSet>
 
